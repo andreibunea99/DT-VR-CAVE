@@ -98,6 +98,19 @@ public class PoseEstimator : MonoBehaviour
     private string predictionLayer = "heatmap_predictions";
 
 
+    public enum EstimationType
+    {
+        MultiPose,
+        SinglePose
+    }
+
+
+    [Tooltip("The type of pose estimation to be performed")]
+    public EstimationType estimationType = EstimationType.SinglePose;
+
+    private Utils.Keypoint[][] poses; 
+
+
     private void InitializeBarracuda()
     {
         // The compiled model used for inference
@@ -238,6 +251,37 @@ public class PoseEstimator : MonoBehaviour
     }
 
 
+    private void ProcessOutput(IWorker engine)
+    {
+        // Get the model output
+        Tensor heatmaps = engine.PeekOutput(predictionLayer);
+        Tensor offsets = engine.PeekOutput(offsetsLayer);
+        Tensor displacementFWD = engine.PeekOutput(displacementFWDLayer);
+        Tensor displacementBWD = engine.PeekOutput(displacementBWDLayer);
+
+        // Calculate the stride used to scale down the iput image
+        int stride = (imageDims.y - 1) / (heatmaps.shape.height - 1);
+        stride -= (stride % 8);
+
+        if (estimationType == EstimationType.SinglePose)
+        {
+            // Initialize the array of Keypoint arrays
+            poses = new Utils.Keypoint[1][];
+            poses[0] = Utils.DecodeSinglePose(heatmaps, offsets, stride);
+        }
+        else
+        {
+
+        }
+
+        // Release the resources allocated for the output Tensors
+        heatmaps.Dispose();
+        offsets.Dispose();
+        displacementFWD.Dispose();
+        displacementBWD.Dispose();
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -338,6 +382,9 @@ public class PoseEstimator : MonoBehaviour
 
         // Release GPU resources allocated for the Tensor
         input.Dispose();
+
+        // Decode the keypoint coordinates from the model output
+        ProcessOutput(engine.worker);
     }
 
 
