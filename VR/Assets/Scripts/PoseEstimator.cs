@@ -108,8 +108,31 @@ public class PoseEstimator : MonoBehaviour
     [Tooltip("The type of pose estimation to be performed")]
     public EstimationType estimationType = EstimationType.SinglePose;
 
-    private Utils.Keypoint[][] poses; 
+    private Utils.Keypoint[][] poses;
 
+    [Tooltip("The maximum number of posees to estimate")]
+    [Range(1, 20)]
+    public int maxPoses = 20;
+
+    [Tooltip("The score threshold for multipose estimation")]
+    [Range(0, 1.0f)]
+    public float scoreThreshold = 0.25f;
+
+    [Tooltip("Non-maximum suppression part distance")]
+    public int nmsRadius = 100;
+
+    [Tooltip("The size of the pose skeleton key points")]
+    public float pointScale = 10f;
+
+    [Tooltip("The width of the pose skeleton lines")]
+    public float lineWidth = 5f;
+
+    [Tooltip("The minimum confidence level required to display the key point")]
+    [Range(0, 100)]
+    public int minConfidence = 70;
+
+    // Array of pose skeletons
+    private PoseSkeleton[] skeletons;
 
     private void InitializeBarracuda()
     {
@@ -271,7 +294,13 @@ public class PoseEstimator : MonoBehaviour
         }
         else
         {
-
+            // Determine the key point locations
+            poses = Utils.DecodeMultiplePoses(
+                heatmaps, offsets,
+                displacementFWD, displacementBWD,
+                stride: stride, maxPoseDetections: maxPoses,
+                scoreThreshold: scoreThreshold,
+                nmsRadius: nmsRadius);
         }
 
         // Release the resources allocated for the output Tensors
@@ -279,6 +308,17 @@ public class PoseEstimator : MonoBehaviour
         offsets.Dispose();
         displacementFWD.Dispose();
         displacementBWD.Dispose();
+    }
+
+
+    private void InitializeSkeletons()
+    {
+        // Initialize the list of pose skeletons
+        if (estimationType == EstimationType.SinglePose) maxPoses = 1;
+        skeletons = new PoseSkeleton[maxPoses];
+
+        // Populate the list of pose skeletons
+        for (int i = 0; i < maxPoses; i++) skeletons[i] = new PoseSkeleton(pointScale, lineWidth);
     }
 
 
@@ -327,6 +367,7 @@ public class PoseEstimator : MonoBehaviour
 
         InitializeBarracuda();
 
+        InitializeSkeletons();
     }
 
     // Update is called once per frame
@@ -385,6 +426,41 @@ public class PoseEstimator : MonoBehaviour
 
         // Decode the keypoint coordinates from the model output
         ProcessOutput(engine.worker);
+
+        // Reinitialize pose skeletons
+        if (maxPoses != skeletons.Length)
+        {
+            foreach (PoseSkeleton skeleton in skeletons)
+            {
+                skeleton.Cleanup();
+            }
+
+            // Initialize pose skeletons
+            InitializeSkeletons();
+        }
+
+        // The smallest dimension of the videoTexture
+        int minDimension = Mathf.Min(videoTexture.width, videoTexture.height);
+
+        // The value used to scale the key point locations up to the source resolution
+        float scale = (float)minDimension / Mathf.Min(imageDims.x, imageDims.y);
+
+        // Update the pose skeletons
+        for (int i = 0; i < skeletons.Length; i++)
+        {
+            if (i <= poses.Length - 1)
+            {
+                skeletons[i].ToggleSkeleton(true);
+
+                // Update the positions for the key point GameObjects
+                skeletons[i].UpdateKeyPointPositions(poses[i], scale, videoTexture, useWebcam, minConfidence);
+                skeletons[i].UpdateLines();
+            }
+            else
+            {
+                skeletons[i].ToggleSkeleton(false);
+            }
+        }
     }
 
 
