@@ -10,6 +10,9 @@
 /VR/[Ll]ogs/
 /VR/[Uu]ser[Ss]ettings/
 
+/VR/Assets/Citygml/
+/VR/Assets/Random3Dcity_2015-03-11/
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /VR/[Mm]emoryCaptures/

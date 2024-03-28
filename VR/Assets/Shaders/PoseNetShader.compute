@@ -6,7 +6,7 @@
 Texture2D<half4> InputImage;
 
 // The pixel data for the processed image
-RWTexture2D<helf4> Result;
+RWTexture2D<half4> Result;
 
 [numthreads(8, 8, 1)]
 void PreprocessMobileNet(uint3 id : SV_DispatchThreadID)
