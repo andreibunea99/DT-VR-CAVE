@@ -68,7 +68,7 @@ public class ArcGISStarter : MonoBehaviour
         arcGISMapComponent.EnableExtent = true;
 
         var extentCenter = new Esri.GameEngine.Geometry.ArcGISPoint(26.048301, 44.434882, 10, ArcGISSpatialReference.WGS84());
-        var extent = new ArcGISExtentCircle(extentCenter, 10000);
+        var extent = new ArcGISExtentCircle(extentCenter, 1000);
 
         arcGISMap.ClippingArea = extent;
 
