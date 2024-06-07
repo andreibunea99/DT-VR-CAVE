@@ -1,0 +1,19 @@
+{
+    "name": "UniCAVE",
+    "rootNamespace": "",
+    "references": [
+        "Unity.TextMeshPro",
+        "com.unity.multiplayer-hlapi.Runtime",
+        "Mirror",
+        "Mirror.Transports"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

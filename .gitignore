@@ -2,6 +2,8 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+ArcGIS/arcgis-maps-sdk-unity-samples
+
 /VR/[Ll]ibrary/
 /VR/[Tt]emp/
 /VR/[Oo]bj/
@@ -12,6 +14,13 @@
 
 /VR/Assets/Citygml/
 /VR/Assets/Random3Dcity_2015-03-11/
+
+# Ignore large ArcGIS SDK binary files
+VR/Packages/com.esri.arcgis-maps-sdk/Binaries/**/Runtimecore.framework/
+VR/Packages/com.esri.arcgis-maps-sdk/Binaries/**/libruntimecore.dylib
+
+ArcGIS/ArcGIS/Packages/com.esri.arcgis-maps-sdk/Binaries
+
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
