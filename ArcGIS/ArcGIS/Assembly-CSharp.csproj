@@ -62,11 +62,13 @@
     <Compile Include="Assets\SampleSceneAssets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\SampleSceneAssets\Scripts\LookWithMouse.cs" />
     <Compile Include="Assets\TestDisplays.cs" />
+    <Compile Include="Assets\VirtualHeadComponent.cs" />
     <Compile Include="Assets\SampleSceneAssets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\CAVEPhysicalDisplay.cs" />
     <Compile Include="Assets\Scripts\AssignCamerasToDisplays.cs" />
     <Compile Include="Assets\Scripts\ActivateDisplays.cs" />
     <Compile Include="Assets\Scenes\OutdoorsScene\ArcGISStarter.cs" />
+    <Compile Include="Assets\CameraCalibrator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />

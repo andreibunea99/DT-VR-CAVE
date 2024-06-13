@@ -428,6 +428,7 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
+"Assets/CameraCalibrator.cs"
 "Assets/SampleSceneAssets/Scripts/LookWithMouse.cs"
 "Assets/SampleSceneAssets/Scripts/PlayerMovement.cs"
 "Assets/SampleSceneAssets/Scripts/SimpleCameraController.cs"
@@ -437,6 +438,7 @@
 "Assets/Scripts/CAVEPhysicalDisplay.cs"
 "Assets/Scripts/test.cs"
 "Assets/TestDisplays.cs"
+"Assets/VirtualHeadComponent.cs"
 -langversion:9.0
 /deterministic
 /optimize-
