@@ -19,7 +19,7 @@ public class ArcGISStarter : MonoBehaviour
 
     public string APIKey = "AAPK42ec43041eae459681484b28c3717d959nOInKrx0g1TjNZkLTYTSb_37kpzaVuo9RbPlHXmowC5WoFfv0QszVzZRvm8xJv_";
     private ArcGISMapComponent arcGISMapComponent;
-    private ArcGISPoint geographicCoordinates = new ArcGISPoint(26.048301, 44.434882, 0, ArcGISSpatialReference.WGS84());
+    private ArcGISPoint geographicCoordinates = new ArcGISPoint(-74.0147094213076, 40.7078110988167, 0, ArcGISSpatialReference.WGS84());
 
     private ArcGISCameraComponent cameraComponent;
 
@@ -49,10 +49,18 @@ public class ArcGISStarter : MonoBehaviour
 
         // -74.0064534551796 40.6777129285649
 
+        // 26.0483135512482
+        // 44.4348282137568
+        // 322.709812164307
+
+
+        // -74.0147094213076
+        // 40.7078110988167
+
         /*var layer_risc_seismic = new Esri.GameEngine.Layers.ArcGISImageLayer("https://services8.arcgis.com/SXiEEy1skwB5SrYh/arcgis/rest/services/Puncte_cladiri_risc_seismic/FeatureServer/0", "MyLayer_0", 1.0f, true, "");
         arcGISMap.Layers.Add(layer_risc_seismic);*/
 
-        /*var layer_1 = new Esri.GameEngine.Layers.ArcGISImageLayer("https://tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/UrbanObservatory_NYC_TransitFrequency/MapServer", "MyLayer_1", 1.0f, true, "");
+        var layer_1 = new Esri.GameEngine.Layers.ArcGISImageLayer("https://tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/UrbanObservatory_NYC_TransitFrequency/MapServer", "MyLayer_1", 1.0f, true, "");
         arcGISMap.Layers.Add(layer_1);
 
         var layer_2 = new Esri.GameEngine.Layers.ArcGISImageLayer("https://tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/New_York_Industrial/MapServer", "MyLayer_2", 1.0f, true, "");
@@ -62,13 +70,13 @@ public class ArcGISStarter : MonoBehaviour
         arcGISMap.Layers.Add(layer_3);
 
         var buildingLayer = new Esri.GameEngine.Layers.ArcGIS3DObjectSceneLayer("https://tiles.arcgis.com/tiles/P3ePLMYs2RVChkJx/arcgis/rest/services/Buildings_NewYork_17/SceneServer", "Building Layer", 1.0f, true, "");
-        arcGISMap.Layers.Add(buildingLayer);*/
+        arcGISMap.Layers.Add(buildingLayer);
 
 
         arcGISMapComponent.EnableExtent = true;
 
-        var extentCenter = new Esri.GameEngine.Geometry.ArcGISPoint(26.048301, 44.434882, 10, ArcGISSpatialReference.WGS84());
-        var extent = new ArcGISExtentCircle(extentCenter, 1000);
+        var extentCenter = new Esri.GameEngine.Geometry.ArcGISPoint(-74.0147094213076, 40.7078110988167, 10, ArcGISSpatialReference.WGS84());
+        var extent = new ArcGISExtentCircle(extentCenter, 10000);
 
         arcGISMap.ClippingArea = extent;
 
@@ -100,7 +108,7 @@ public class ArcGISStarter : MonoBehaviour
             cameraLocationComponent = cameraComponent.gameObject.AddComponent<ArcGISLocationComponent>();
 
             cameraLocationComponent.Position = geographicCoordinates;
-            cameraLocationComponent.Rotation = new ArcGISRotation(65, 68, 0);
+            //cameraLocationComponent.Rotation = new ArcGISRotation(65, 68, 0);
         }
     }
 
