@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1572.3584, g: 1716.6328, b: 2647.7852, a: 1}
+  m_IndirectSpecularColor: {r: 1558.9521, g: 1689.9336, b: 2571.0547, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -727,7 +727,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688464}
   m_LocalRotation: {x: 0.16092673, y: 0.52742803, z: -0.10252161, w: 0.82789594}
-  m_LocalPosition: {x: 0, y: 150, z: 0}
+  m_LocalPosition: {x: 11138963, y: 150, z: 563650.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -922,9 +922,9 @@ MonoBehaviour:
   UpdateClippingPlanes: 1
   UseCameraViewportProperties: 1
   verticalFov: 60
-  horizontalFov: 53.69434
-  viewportSizeX: 448
-  viewportSizeY: 511
+  horizontalFov: 91.46901
+  viewportSizeX: 1068
+  viewportSizeY: 601
   qualityScalingFactor: 1
 --- !u!114 &1823688473
 MonoBehaviour:
@@ -996,7 +996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c703502c1493f5b4eb3e95b2efe0271e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  apiKey: 
+  apiKey: AAPK42ec43041eae459681484b28c3717d959nOInKrx0g1TjNZkLTYTSb_37kpzaVuo9RbPlHXmowC5WoFfv0QszVzZRvm8xJv_
   basemap: 
   basemapType: 0
   basemapAuthentication:
@@ -1045,8 +1045,8 @@ MonoBehaviour:
       Polygons: []
       Type: 0
   originPosition:
-    x: 26.048301
-    y: 44.434882
+    x: -74.0147094213076
+    y: 40.7078110988167
     z: 0
     SRWkid: 4326
   mapType: 1
@@ -1072,9 +1072,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LocalPosition:
-    x: 2899683.603349919
+    x: -8239279.763992071
     y: 0
-    z: 5532989.67899718
+    z: 4969338.928139815
   m_LocalRotation:
     value:
       x: 0

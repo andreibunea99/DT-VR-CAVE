@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 5097.3945, g: 5428.9883, b: 8102.0938, a: 1}
+  m_IndirectSpecularColor: {r: 1571.3896, g: 1714.0938, b: 2638.9297, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -483,6 +483,7 @@ GameObject:
   - component: {fileID: 290600369}
   - component: {fileID: 290600368}
   - component: {fileID: 290600367}
+  - component: {fileID: 290600370}
   m_Layer: 0
   m_Name: ArcGISMap
   m_TagString: Untagged
@@ -603,6 +604,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &290600370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290600366}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8007d3b13434c6f43850bcd9a951773b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arcGISCamera: {fileID: 1600833019}
 --- !u!1 &431959666
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,15 +954,15 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  near clip plane: 0.1
+  far clip plane: 20
+  field of view: 100
+  orthographic: 1
+  orthographic size: 5.4
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2048
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 2
@@ -968,7 +982,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433109142}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.6, y: 0, z: -5.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1150,15 +1164,15 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  near clip plane: 0.1
+  far clip plane: 20
+  field of view: 100
+  orthographic: 1
+  orthographic size: 5.4
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4096
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 3
@@ -1178,7 +1192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 502739212}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.4, y: 0, z: -5.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1736,7 +1750,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualHead: {fileID: 892105707}
   arcGISCamera: {fileID: 1600833019}
-  moveSpeed: 0.5
+  moveSpeed: 10
+  rotationSpeed: 100
 --- !u!1 &1028963364
 GameObject:
   m_ObjectHideFlags: 0
@@ -2008,7 +2023,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273537316}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2171,11 +2186,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 10
-  field of view: 110
-  orthographic: 0
-  orthographic size: 5
+  near clip plane: 0.1
+  far clip plane: 20
+  field of view: 107
+  orthographic: 1
+  orthographic size: 5.4
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -2338,7 +2353,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311923249}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
@@ -2671,9 +2686,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position:
-    x: -74.0147094213076
-    y: 40.7078110988167
-    z: 322.70981216430664
+    x: 0
+    y: 0
+    z: 0
     SRWkid: 4326
   rotation:
     Heading: 0
@@ -2721,9 +2736,9 @@ MonoBehaviour:
   UpdateClippingPlanes: 1
   UseCameraViewportProperties: 1
   verticalFov: 60
-  horizontalFov: 75.17818
-  viewportSizeX: 640
-  viewportSizeY: 480
+  horizontalFov: 91.455925
+  viewportSizeX: 517
+  viewportSizeY: 291
   qualityScalingFactor: 1
 --- !u!114 &1600833016
 MonoBehaviour:
@@ -2928,9 +2943,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IsInitialized: 1
   m_LocalPosition:
-    x: -8239279.763992071
-    y: 322.70981216430664
-    z: 4969338.928139815
+    x: 0
+    y: 0
+    z: -0.0000000007081154551613622
   m_LocalRotation:
     value:
       x: 0.70710677
@@ -2970,13 +2985,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741375fa5cbaf2d449181c20268d5bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 1
   posenetShader: {fileID: 7200000, guid: e7e3ceb5c0c465840b2206d3c22b5509, type: 3}
   modelType: 0
   useGPU: 1
   imageDims: {x: 256, y: 256}
   webcamDims: {x: 1280, y: 720}
   webcamFPS: 60
-  useWebcam: 0
+  useWebcam: 1
   videoScreen: {fileID: 227194623}
   mobileNetModelAsset: {fileID: 5022602860645237092, guid: 23aeaf2264b8b404c979dd19a50a25f7, type: 3}
   resnetModelAsset: {fileID: 5022602860645237092, guid: 65335a41b44652247a9078d4a204adb2, type: 3}
@@ -2984,6 +3000,7 @@ MonoBehaviour:
   maxPoses: 20
   scoreThreshold: 0.25
   nmsRadius: 100
+  videoScreenOffset: {x: 20000, y: 500, z: 0}
   estimationType: 1
   pointScale: 10
   lineWidth: 5
@@ -3305,7 +3322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911189899}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -9.6, y: 0, z: -9.61}
+  m_LocalPosition: {x: -9.6, y: 0, z: -9.6}
   m_LocalScale: {x: 1.92, y: 1, z: 1.08}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3731,7 +3748,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027087412}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0

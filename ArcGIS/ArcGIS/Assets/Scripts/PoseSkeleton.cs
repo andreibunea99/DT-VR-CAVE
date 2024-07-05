@@ -22,43 +22,43 @@ public class PoseSkeleton
 
     // The pairs of key points that should be connected on a body
     private Tuple<int, int>[] jointPairs = new Tuple<int, int>[]{
-    // Nose to Left Eye
-    Tuple.Create(0, 1),
-    // Nose to Right Eye
-    Tuple.Create(0, 2),
-    // Left Eye to Left Ear
-    Tuple.Create(1, 3),
-    // Right Eye to Right Ear
-    Tuple.Create(2, 4),
-    // Left Shoulder to Right Shoulder
-    Tuple.Create(5, 6),
-    // Left Shoulder to Left Hip
-    Tuple.Create(5, 11),
-    // Right Shoulder to Right Hip
-    Tuple.Create(6, 12),
-    // Left Shoulder to Right Hip
-    Tuple.Create(5, 12),
-    // Rigth Shoulder to Left Hip
-    Tuple.Create(6, 11),
-    // Left Hip to Right Hip
-    Tuple.Create(11, 12),
-    // Left Shoulder to Left Elbow
-    Tuple.Create(5, 7),
-    // Left Elbow to Left Wrist
-    Tuple.Create(7, 9), 
-    // Right Shoulder to Right Elbow
-    Tuple.Create(6, 8),
-    // Right Elbow to Right Wrist
-    Tuple.Create(8, 10),
-    // Left Hip to Left Knee
-    Tuple.Create(11, 13), 
-    // Left Knee to Left Ankle
-    Tuple.Create(13, 15),
-    // Right Hip to Right Knee
-    Tuple.Create(12, 14), 
-    // Right Knee to Right Ankle
-    Tuple.Create(14, 16)
-};
+        // Nose to Left Eye
+        Tuple.Create(0, 1),
+        // Nose to Right Eye
+        Tuple.Create(0, 2),
+        // Left Eye to Left Ear
+        Tuple.Create(1, 3),
+        // Right Eye to Right Ear
+        Tuple.Create(2, 4),
+        // Left Shoulder to Right Shoulder
+        Tuple.Create(5, 6),
+        // Left Shoulder to Left Hip
+        Tuple.Create(5, 11),
+        // Right Shoulder to Right Hip
+        Tuple.Create(6, 12),
+        // Left Shoulder to Right Hip
+        Tuple.Create(5, 12),
+        // Rigth Shoulder to Left Hip
+        Tuple.Create(6, 11),
+        // Left Hip to Right Hip
+        Tuple.Create(11, 12),
+        // Left Shoulder to Left Elbow
+        Tuple.Create(5, 7),
+        // Left Elbow to Left Wrist
+        Tuple.Create(7, 9), 
+        // Right Shoulder to Right Elbow
+        Tuple.Create(6, 8),
+        // Right Elbow to Right Wrist
+        Tuple.Create(8, 10),
+        // Left Hip to Left Knee
+        Tuple.Create(11, 13), 
+        // Left Knee to Left Ankle
+        Tuple.Create(13, 15),
+        // Right Hip to Right Knee
+        Tuple.Create(12, 14), 
+        // Right Knee to Right Ankle
+        Tuple.Create(14, 16)
+    };
 
     // Colors for the skeleton lines
     private Color[] colors = new Color[] {
@@ -75,8 +75,6 @@ public class PoseSkeleton
     // The width for the skeleton lines
     private float lineWidth;
 
-    // The material for the key point objects
-    private Material keypointMat;
 
     public PoseSkeleton(float pointScale = 10f, float lineWidth = 5f)
     {
@@ -97,12 +95,40 @@ public class PoseSkeleton
         this.lineWidth = lineWidth;
 
         // The number of joint pairs
-        int numPairs = keypoints.Length + 1;
+        int numPairs = jointPairs.Length;
         // Initialize the lines array
         lines = new GameObject[numPairs];
 
         // Initialize the pose skeleton
         InitializeSkeleton();
+    }
+
+    /// <summary>
+    /// Toggles visibility for the skeleton
+    /// </summary>
+    /// <param name="show"></param>
+    public void ToggleSkeleton(bool show)
+    {
+        for (int i = 0; i < jointPairs.Length; i++)
+        {
+            lines[i].SetActive(show);
+            keypoints[jointPairs[i].Item1].gameObject.SetActive(show);
+            keypoints[jointPairs[i].Item2].gameObject.SetActive(show);
+        }
+    }
+
+    /// <summary>
+    /// Clean up skeleton GameObjects
+    /// </summary>
+    public void Cleanup()
+    {
+
+        for (int i = 0; i < jointPairs.Length; i++)
+        {
+            GameObject.Destroy(lines[i]);
+            GameObject.Destroy(keypoints[jointPairs[i].Item1].gameObject);
+            GameObject.Destroy(keypoints[jointPairs[i].Item2].gameObject);
+        }
     }
 
 
@@ -150,36 +176,6 @@ public class PoseSkeleton
         }
     }
 
-
-    /// <summary>
-    /// Toggles visibility for the skeleton
-    /// </summary>
-    /// <param name="show"></param>
-    public void ToggleSkeleton(bool show)
-    {
-        for (int i = 0; i < jointPairs.Length; i++)
-        {
-            lines[i].SetActive(show);
-            keypoints[jointPairs[i].Item1].gameObject.SetActive(show);
-            keypoints[jointPairs[i].Item2].gameObject.SetActive(show);
-        }
-    }
-
-
-    /// <summary>
-    /// Clean up skeleton GameObjects
-    /// </summary>
-    public void Cleanup()
-    {
-        for (int i = 0; i < jointPairs.Length; i++)
-        {
-            GameObject.Destroy(lines[i]);
-            GameObject.Destroy(keypoints[jointPairs[i].Item1].gameObject);
-            GameObject.Destroy(keypoints[jointPairs[i].Item2].gameObject);
-        }
-    }
-
-
     /// <summary>
     /// Update the positions for the key point GameObjects
     /// </summary>
@@ -188,7 +184,8 @@ public class PoseSkeleton
     /// <param name="sourceTexture"></param>
     /// <param name="mirrorImage"></param>
     /// <param name="minConfidence"></param>
-    public void UpdateKeyPointPositions(Utils.Keypoint[] keypoints, float sourceScale, RenderTexture sourceTexture, bool mirrorImage, float minConfidence, Vector3 videoScreenPosition)
+    public void UpdateKeyPointPositions(Utils.Keypoint[] keypoints,
+        float sourceScale, RenderTexture sourceTexture, bool mirrorImage, float minConfidence, Vector3 videoScreenPosition, Vector3 videoScreenOffset)
     {
         // Iterate through the key points
         for (int k = 0; k < keypoints.Length; k++)
@@ -214,12 +211,12 @@ public class PoseSkeleton
             // Mirror the x position if using a webcam
             if (mirrorImage) coords.x = sourceTexture.width - coords.x;
 
-            // Adjust the key point location to the new VideoScreen position
-            this.keypoints[k].position = new Vector3(coords.x + videoScreenPosition.x, coords.y + videoScreenPosition.y, videoScreenPosition.z - 1f);
+            //videoScreen.position += offset_poz;
+            // Update the current key point location
+            // Set the z value to -1f to place it in front of the video screen
+            this.keypoints[k].position = new Vector3(coords.x, coords.y, videoScreenPosition.z - 1f) + videoScreenOffset;
         }
     }
-
-
 
     /// <summary>
     /// Draw the pose skeleton based on the latest location data
@@ -254,5 +251,4 @@ public class PoseSkeleton
             }
         }
     }
-
 }
