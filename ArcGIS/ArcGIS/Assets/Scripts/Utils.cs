@@ -12,6 +12,7 @@ public class Utils
     /// confidence scores higher than the one at the current heatmap coordinate
     /// </summary>
     const int kLocalMaximumRadius = 1;
+    public static VirtualHeadComponent virtualHeadComponent;
 
     /// <summary>
     /// Defines the parent->child relationships used for multipose detection.
@@ -169,6 +170,9 @@ public class Utils
             // Add the current keypoint to the list
             keypoints[c] = part;
         }
+
+        virtualHeadComponent?.UpdateHeadPosition(keypoints);
+
 
         return keypoints;
     }

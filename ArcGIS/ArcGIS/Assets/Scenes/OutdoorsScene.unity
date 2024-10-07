@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1558.9521, g: 1689.9336, b: 2571.0547, a: 1}
+  m_IndirectSpecularColor: {r: 1572.8564, g: 1718.8828, b: 2655.543, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -922,9 +922,9 @@ MonoBehaviour:
   UpdateClippingPlanes: 1
   UseCameraViewportProperties: 1
   verticalFov: 60
-  horizontalFov: 91.46901
-  viewportSizeX: 1068
-  viewportSizeY: 601
+  horizontalFov: 91.52993
+  viewportSizeX: 1030
+  viewportSizeY: 579
   qualityScalingFactor: 1
 --- !u!114 &1823688473
 MonoBehaviour:
@@ -933,12 +933,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688464}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0fce1f6a396683489f678f570894266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  APIKey: AAPK42ec43041eae459681484b28c3717d959nOInKrx0g1TjNZkLTYTSb_37kpzaVuo9RbPlHXmowC5WoFfv0QszVzZRvm8xJv_
+  APIKey: AAPTxy8BH1VEsoebNVZXo8HurG3GCfUdeJLRV8DGatqk0H2MRAtPfL9hBn6KEQMBbq8IRHHVIu4jAHu9YZA80EDk8nBjjkpyCwDChTJZ01EzT3LrqG9L0DJUUwbnyUNmGg-80nMNaBj9jcT020Y6Khepk3uESujzSCv5gH72cavSr6SRSzybk3-lj5DqJAvqWgPl3q6vPc3enNb5W4bdY4Rvd1pw6w0UKVxk-cTCLuPMlV0.AT1_rCBEjhM4
 --- !u!114 &1823688474
 MonoBehaviour:
   m_ObjectHideFlags: 0

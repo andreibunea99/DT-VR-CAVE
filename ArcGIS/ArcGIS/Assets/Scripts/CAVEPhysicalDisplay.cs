@@ -12,11 +12,11 @@ public class CAVEPhysicalDisplay : MonoBehaviour
         if (displayCamera != null && renderTexture != null)
         {
             displayCamera.targetTexture = renderTexture;
-            Debug.LogWarning("Textures generated successfully");
+            //Debug.LogWarning("Textures generated successfully");
         }   
         else
         {
-            Debug.LogError("Camera or RenderTexture not assigned as PhysicalDisplay script on " + gameObject.name);
+            //Debug.LogError("Camera or RenderTexture not assigned as PhysicalDisplay script on " + gameObject.name);
         }
     }
 

@@ -14,6 +14,9 @@ public class PoseEstimator : MonoBehaviour
 
     public bool isActive = true;
 
+    [Tooltip("The user GameObject")]
+    public User user;
+
     [Tooltip("The ComputeShader that will perform the model-specific preprocessing")]
     public ComputeShader posenetShader;
 
@@ -146,6 +149,8 @@ public class PoseEstimator : MonoBehaviour
     // Array of pose skeletons
     private PoseSkeleton[] skeletons;
 
+    private Utils.Keypoint[] mainPose;
+
 
     /// <summary>
     /// Prepares the videoScreen GameObject to display the chosen video source.
@@ -177,10 +182,8 @@ public class PoseEstimator : MonoBehaviour
         videoScreen.localScale = new Vector3(width, height, videoScreen.localScale.z);
 
         // Adjust the VideoScreen position for the new videoTexture
-       // videoScreen.position = new Vector3(20000 + width / 2, 500 + height / 2, 1);
         videoScreen.position = new Vector3(width / 2, height / 2, 1);
         videoScreen.position += videoScreenOffset;
-        //videoScreen.position = new Vector3(20000, 500, 1);
     }
 
 
@@ -195,12 +198,11 @@ public class PoseEstimator : MonoBehaviour
         // Adjust the camera position to account for updates to the VideoScreen
         Vector3 offset_poz = new Vector3(20000, 500, 0);
         poseCamera.transform.position = new Vector3(videoDims.x / 2, videoDims.y / 2, -10f) + offset_poz;
-        //Debug.Log(poseCamera.transform.position);
 
         // Render objects with no perspective
         poseCamera.GetComponent<Camera>().orthographic = true;
 
-        // Adjust the camera size to account for updates to the VideScreen
+        // Adjust the camera size to account for updates to the VideoScreen
         poseCamera.GetComponent<Camera>().orthographicSize = videoDims.y / 2;
     }
 
@@ -208,11 +210,6 @@ public class PoseEstimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!isActive)
-        {
-            return;
-        }
-
         if (useWebcam)
         {
             // Limit application framerate to target webcam framerate
@@ -238,6 +235,8 @@ public class PoseEstimator : MonoBehaviour
             videoDims.y = (int)videoScreen.GetComponent<VideoPlayer>().height;
             videoDims.x = (int)videoScreen.GetComponent<VideoPlayer>().width;
         }
+
+        Debug.Log("Video Dims: " + videoDims);
 
         // Create a new videoTexture using the current video dimensions
         videoTexture = RenderTexture.GetTemporary(videoDims.x, videoDims.y, 24, RenderTextureFormat.ARGBHalf);
@@ -360,6 +359,11 @@ public class PoseEstimator : MonoBehaviour
             {
                 skeletons[i].ToggleSkeleton(false);
             }
+        }
+
+        if (user != null && skeletons.Length > 0 && skeletons[0] != null)
+        {
+            user.setSkeleton(skeletons[0], videoScreenOffset);
         }
     }
 
@@ -495,6 +499,7 @@ public class PoseEstimator : MonoBehaviour
 
             // Determine the key point locations
             poses[0] = Utils.DecodeSinglePose(heatmaps, offsets, stride);
+            mainPose = poses[0];
         }
         else
         {
@@ -512,6 +517,14 @@ public class PoseEstimator : MonoBehaviour
         displacementFWD.Dispose();
         displacementBWD.Dispose();
     }
+
+
+    public Utils.Keypoint[] GetMainPose()
+    {
+        return mainPose;
+    }
+
+
 
     /// <summary>
     /// Initialize pose skeletons

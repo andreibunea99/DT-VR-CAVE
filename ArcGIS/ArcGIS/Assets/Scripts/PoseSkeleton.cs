@@ -18,6 +18,7 @@ public class PoseSkeleton
         "leftHip", "rightHip", "leftKnee", "rightKnee", "leftAnkle", "rightAnkle"
     };
 
+
     private static int NUM_KEYPOINTS = partNames.Length;
 
     // The pairs of key points that should be connected on a body

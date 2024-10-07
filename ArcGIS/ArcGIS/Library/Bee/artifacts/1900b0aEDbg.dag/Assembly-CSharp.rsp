@@ -438,6 +438,8 @@
 "Assets/AlignCamerasComponent.cs"
 "Assets/CameraCalibrator.cs"
 "Assets/MapCameraComponent.cs"
+"Assets/PerimeterSelector.cs"
+"Assets/PythonSocketClient.cs"
 "Assets/SampleSceneAssets/Scripts/LookWithMouse.cs"
 "Assets/SampleSceneAssets/Scripts/PlayerMovement.cs"
 "Assets/SampleSceneAssets/Scripts/SimpleCameraController.cs"
@@ -445,11 +447,13 @@
 "Assets/Scripts/ActivateDisplays.cs"
 "Assets/Scripts/AssignCamerasToDisplays.cs"
 "Assets/Scripts/CAVEPhysicalDisplay.cs"
+"Assets/Scripts/MainScript.cs"
 "Assets/Scripts/PoseEstimator.cs"
 "Assets/Scripts/PoseSkeleton.cs"
 "Assets/Scripts/test.cs"
 "Assets/Scripts/Utils.cs"
 "Assets/TestDisplays.cs"
+"Assets/User.cs"
 "Assets/VirtualHeadComponent.cs"
 -langversion:9.0
 /deterministic

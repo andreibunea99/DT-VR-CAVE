@@ -9,6 +9,14 @@ public class VirtualHeadComponent : MonoBehaviour
     public float moveSpeed = 20.0f;
     public float rotationSpeed = 100.0f;
 
+    public Utils.Keypoint nose { get; set; }
+    public Utils.Keypoint leftEye { get; set; }
+    public Utils.Keypoint rightEye { get; set; }
+    public Utils.Keypoint leftEar { get; set; }
+    public Utils.Keypoint rightEar { get; set; }
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,5 +108,35 @@ public class VirtualHeadComponent : MonoBehaviour
             arcGISCamera.transform.Rotate(0, rotation, 0, Space.World);
             Vector3 euler = virtualHead.rotation.eulerAngles;
         }
+    }
+
+    // Update the head keypoints and adjust the virtual head position
+    public void UpdateHeadPosition(Utils.Keypoint[] keypoints)
+    {
+        int noseId = 0;
+        int leftEyeId = 1;
+        int rightEyeId = 2;
+        int leftEarId = 3;
+        int rightEarId = 4;
+
+        // Extract the keypoints for the head parts
+        nose = keypoints[noseId];
+        leftEye = keypoints[leftEyeId];
+        rightEye = keypoints[rightEyeId];
+        leftEar = keypoints[leftEarId];
+        rightEar = keypoints[rightEarId];
+
+        Debug.Log(leftEye.position + " " + rightEye.position);
+
+        // Here, you should calculate the 3D position from the 2D keypoints
+        //Vector3 headPosition = Calculate3DPosition();
+        //transform.position = headPosition;
+    }
+
+    private Vector3 Calculate3DPosition()
+    {
+        // Implement your method to approximate the 3D position here
+        // For now, we'll return a placeholder vector
+        return new Vector3(0, 0, 0);
     }
 }

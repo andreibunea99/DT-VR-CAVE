@@ -60,7 +60,11 @@
   <ItemGroup>
     <Compile Include="Assets\CameraCalibrator.cs" />
     <Compile Include="Assets\Scripts\PoseSkeleton.cs" />
+    <Compile Include="Assets\Scripts\MainScript.cs" />
     <Compile Include="Assets\Scripts\PoseEstimator.cs" />
+    <Compile Include="Assets\PerimeterSelector.cs" />
+    <Compile Include="Assets\User.cs" />
+    <Compile Include="Assets\PythonSocketClient.cs" />
     <Compile Include="Assets\Scripts\test.cs" />
     <Compile Include="Assets\Scripts\Utils.cs" />
     <Compile Include="Assets\SampleSceneAssets\Scripts\SimpleCameraController.cs" />
